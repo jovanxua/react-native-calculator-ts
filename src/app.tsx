@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View,Text,ToastAndroid } from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  ToastAndroid,
+  Alert,
+  Platform,
+} from 'react-native';
 //Custom Components
 import NumericKeypad from './components/numeric-keypad';
 import HistoryView from './components/history-view';
@@ -121,7 +128,15 @@ export default class App extends Component<{}, AppState> {
 
   //Function to display an android toast
   showToast = (value: string) => {
-    ToastAndroid.show(value, ToastAndroid.SHORT);
+    if (Platform.OS === 'ios') {
+      return Alert.alert(
+        'Error',
+        value,
+        [{text: 'OK', onPress: () => {}}],
+        { cancelable: false }
+      );
+    }
+    return ToastAndroid.show(value, ToastAndroid.SHORT);
   }
 
   render() {
