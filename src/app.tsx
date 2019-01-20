@@ -37,21 +37,22 @@ export default class App extends Component<{}, AppState> {
   onKeyPress = (value: string) => {
     const { outputString } = this.state;
 
-    if(!isNaN(+value) || value === keyMatrix[4][0]){
+    // NOT A NUMBER OR DECIMAL (.)
+    if(!isNaN(+value) || value === keyMatrix[4][0]){ 
       this.concatToOutput(value);
     }
     else{
       switch(value) {
-        case keyMatrix[0][0]:
+        case keyMatrix[0][0]: // CLEAR
           return this.initOutput();
 
-        case keyMatrix[0][1]:
+        case keyMatrix[0][1]: // DEL
           if (outputString.length === 1){
             return this.initOutput();
           }
           return this.replaceLastChar('');
 
-        case keyMatrix[4][2]:
+        case keyMatrix[4][2]: // EQUALS
           return this.evaluateExpression();
 
         default:
@@ -122,7 +123,7 @@ export default class App extends Component<{}, AppState> {
   showToast = (value: string) => {
     ToastAndroid.show(value, ToastAndroid.SHORT);
   }
- 
+
   render() {
     const { history, outputString } = this.state;
     return (

@@ -35,7 +35,7 @@ class HistoryView extends PureComponent<CalculatorHistoryProps, {}> {
         </View>
         { data.length > 0 ? (
           <ScrollView
-          ref={ref => this.scrollView = ref}
+            ref={ref => this.scrollView = ref}
             onContentSizeChange={this.onContentChange}     
           >
             {
